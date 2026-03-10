@@ -253,7 +253,7 @@ export const PROJECTS: Project[] = [
   {
     title: "HR Performance Calibration Tool",
     description:
-      "An AI-powered HR tool built independently to demonstrate product thinking, AI implementation skills, and rapid prototyping ability. Built from concept to deployment using AI-assisted development workflows.",
+      "A lightweight SaaS prototype that gives HR managers and leadership an eagle-eye view of performance ratings across the organisation, helping identify deviations and course-correct before appraisals are finalised.",
     link: "https://hr-performance-calibration-tool.vercel.app",
     type: "external",
     tags: ["AI / LLM", "Live Project", "Self-built"],

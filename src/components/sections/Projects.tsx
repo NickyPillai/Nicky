@@ -74,6 +74,9 @@ export default function Projects() {
                       <span className="mt-2 text-xs tracking-wide text-gray-400 uppercase">
                         Deployed on Vercel
                       </span>
+                      <span className="mt-2 text-xs tracking-wide text-gray-400 uppercase">
+                        DB on Supabase
+                      </span>
                     </div>
                   </div>
                 </div>

@@ -67,12 +67,7 @@ export default function Navbar() {
               {link.label}
             </Link>
           ))}
-          <Link
-            href="/services"
-            className="rounded-lg bg-primary-600 px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-primary-700"
-          >
-            Hire Me
-          </Link>
+         
         </div>
 
         {/* Mobile menu button */}
