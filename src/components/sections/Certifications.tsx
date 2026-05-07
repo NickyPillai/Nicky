@@ -1,80 +1,173 @@
 "use client";
 
+import { useState } from "react";
+import Image from "next/image";
 import { motion } from "framer-motion";
-import { useInView } from "react-intersection-observer";
-import { Award, BadgeCheck } from "lucide-react";
+import { BadgeCheck, Star, ExternalLink } from "lucide-react";
 import { CERTIFICATIONS, AWARDS } from "@/lib/constants";
-import SectionHeading from "@/components/ui/SectionHeading";
-import { staggerContainer, fadeInUp } from "@/lib/animations";
 
-export default function Certifications() {
-  const { ref, inView } = useInView({ triggerOnce: true, threshold: 0.1 });
+function AwardImage({ src, alt, accent }: { src: string; alt: string; accent: string }) {
+  const [failed, setFailed] = useState(false);
+
+  if (failed) {
+    return (
+      <div
+        className="flex h-44 w-full items-center justify-center"
+        style={{ background: `linear-gradient(135deg, ${accent}22, ${accent}55)` }}
+      >
+        <Star size={40} style={{ color: accent, opacity: 0.6 }} />
+      </div>
+    );
+  }
 
   return (
-    <section className="bg-gray-50 py-20 lg:py-28">
+    <div className="relative h-44 w-full overflow-hidden">
+      <Image
+        src={src}
+        alt={alt}
+        fill
+        className="object-cover transition-transform duration-500 group-hover:scale-105"
+        onError={() => setFailed(true)}
+      />
+      <div
+        className="absolute inset-0"
+        style={{ background: `linear-gradient(to top, ${accent}cc 0%, transparent 55%)` }}
+      />
+    </div>
+  );
+}
+
+export default function Certifications() {
+  return (
+    <section id="certifications" style={{ background: "#F0E8DF" }} className="py-20 lg:py-28">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <SectionHeading
-          title="Certifications & Awards"
-          subtitle="Recognized expertise and continuous learning in product management and agile methodologies."
-        />
 
+        {/* Header */}
         <motion.div
-          ref={ref}
-          initial="hidden"
-          animate={inView ? "visible" : "hidden"}
-          variants={staggerContainer}
-          className="grid grid-cols-1 gap-12 lg:grid-cols-2"
+          initial={{ opacity: 0, y: 16 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5 }}
+          className="mb-14 text-center"
         >
-          {/* Certifications */}
-          <div>
-            <h3 className="font-heading mb-6 flex items-center gap-2 text-xl font-bold text-gray-900">
-              <BadgeCheck className="text-primary-600" size={24} />
-              Certifications
-            </h3>
-            <div className="space-y-4">
-              {CERTIFICATIONS.map((cert) => (
-                <motion.div
-                  key={cert.name}
-                  variants={fadeInUp}
-                  className="flex items-start gap-4 rounded-lg bg-white p-4 shadow-sm"
-                >
-                  <div className="flex-shrink-0 rounded-full bg-primary-50 p-2">
-                    <BadgeCheck className="text-primary-600" size={20} />
-                  </div>
-                  <div>
-                    <p className="font-semibold text-gray-900">{cert.name}</p>
-                    <p className="text-sm text-gray-500">{cert.issuer}</p>
-                  </div>
-                </motion.div>
-              ))}
-            </div>
-          </div>
+          <span
+            className="mb-3 inline-block rounded-full px-3 py-1 text-xs font-semibold uppercase tracking-widest"
+            style={{ background: "#FAF7F4", color: "#C2553A" }}
+          >
+            Credentials
+          </span>
+          <h2 className="font-heading text-3xl font-bold md:text-4xl" style={{ color: "#1C1410" }}>
+            Certifications & Recognition
+          </h2>
+        </motion.div>
 
-          {/* Awards */}
-          <div>
-            <h3 className="font-heading mb-6 flex items-center gap-2 text-xl font-bold text-gray-900">
-              <Award className="text-primary-600" size={24} />
-              Awards & Recognition
-            </h3>
-            <div className="space-y-4">
-              {AWARDS.map((award) => (
+        {/* Certifications row */}
+        <div className="mb-14">
+          <h3
+            className="font-heading mb-6 text-xs font-semibold uppercase tracking-widest"
+            style={{ color: "#C2553A" }}
+          >
+            Certifications
+          </h3>
+          <div className="grid gap-3 sm:grid-cols-2">
+            {CERTIFICATIONS.map((cert, i) => (
+              <motion.div
+                key={cert.name}
+                initial={{ opacity: 0, y: 12 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.4, delay: i * 0.07 }}
+                className="flex items-start gap-4 rounded-xl p-5"
+                style={{ background: "#FAF7F4" }}
+              >
+                <span
+                  className="mt-0.5 flex-shrink-0 rounded-lg p-2"
+                  style={{ background: "#C2553A", color: "#FAF7F4" }}
+                >
+                  <BadgeCheck size={18} />
+                </span>
+                <div>
+                  <p className="font-semibold text-sm" style={{ color: "#1C1410" }}>{cert.name}</p>
+                  <p className="mt-0.5 text-xs" style={{ color: "#8B6A52" }}>{cert.issuer}</p>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+
+        {/* Awards grid */}
+        <div>
+          <h3
+            className="font-heading mb-6 text-xs font-semibold uppercase tracking-widest"
+            style={{ color: "#C2553A" }}
+          >
+            Awards & Recognition
+          </h3>
+          <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+            {AWARDS.map((award, i) => {
+              const accent = award.accent ?? "#C2553A";
+
+              const cardInner = (
                 <motion.div
                   key={award.name}
-                  variants={fadeInUp}
-                  className="flex items-start gap-4 rounded-lg bg-white p-4 shadow-sm"
+                  initial={{ opacity: 0, y: 16 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.45, delay: i * 0.08 }}
+                  className="group relative flex flex-col overflow-hidden rounded-2xl h-full"
+                  style={{
+                    background: "#FAF7F4",
+                    border: `2px solid ${accent}33`,
+                    boxShadow: `0 4px 20px ${accent}18`,
+                  }}
                 >
-                  <div className="flex-shrink-0 rounded-full bg-primary-50 p-2">
-                    <Award className="text-primary-600" size={20} />
-                  </div>
-                  <div>
-                    <p className="font-semibold text-gray-900">{award.name}</p>
-                    <p className="text-sm text-gray-500">{award.year}</p>
+                  {award.image ? (
+                    <AwardImage src={award.image} alt={award.name} accent={accent} />
+                  ) : (
+                    <div
+                      className="flex h-44 w-full items-center justify-center"
+                      style={{ background: `linear-gradient(135deg, ${accent}22, ${accent}55)` }}
+                    >
+                      <Star size={40} style={{ color: accent, opacity: 0.6 }} />
+                    </div>
+                  )}
+
+                  <div className="flex flex-1 flex-col gap-1 p-4">
+                    <div className="flex items-start justify-between gap-2">
+                      <p className="font-heading text-sm font-bold leading-snug" style={{ color: "#1C1410" }}>
+                        {award.name}
+                      </p>
+                      {award.link && (
+                        <ExternalLink size={13} className="mt-0.5 flex-shrink-0" style={{ color: accent }} />
+                      )}
+                    </div>
+                    <span
+                      className="mt-auto inline-block self-start rounded-full px-2.5 py-0.5 text-xs font-semibold"
+                      style={{ background: `${accent}18`, color: accent }}
+                    >
+                      {award.year}
+                    </span>
                   </div>
                 </motion.div>
-              ))}
-            </div>
+              );
+
+              return award.link ? (
+                <a
+                  key={award.name}
+                  href={award.link}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="block transition-transform hover:-translate-y-1"
+                  aria-label={award.name}
+                >
+                  {cardInner}
+                </a>
+              ) : (
+                <div key={award.name}>{cardInner}</div>
+              );
+            })}
           </div>
-        </motion.div>
+        </div>
       </div>
     </section>
   );

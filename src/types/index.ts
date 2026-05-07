@@ -20,6 +20,14 @@ export interface Project {
   tagColor?: "green" | "purple" | "gold";
 }
 
+export interface AIProject {
+  title: string;
+  description: string;
+  techTags: string[];
+  link: string;
+  status: "live" | "in-progress" | "concept";
+}
+
 export interface Role {
   title: string;
   duration: string;
@@ -54,6 +62,9 @@ export interface Certification {
 export interface Award {
   name: string;
   year: string;
+  link?: string;
+  image?: string;
+  accent?: string;
 }
 
 export interface ImpactCard {

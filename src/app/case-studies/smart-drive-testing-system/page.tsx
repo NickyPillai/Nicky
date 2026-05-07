@@ -1,203 +1,234 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { ArrowLeft, CheckCircle, Users, BarChart3, Shield } from "lucide-react";
-import Button from "@/components/ui/Button";
+import { ArrowLeft, CheckCircle2, Users, BarChart3, Shield, Cpu } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: "Smart Drive Testing System Case Study",
+  title: "Smart Drive Testing System | Nicky Pillai",
   description:
     "AI-powered driver evaluation system for Dubai RTA using computer vision and sensor-fusion to automate road test assessments.",
 };
 
+const impacts = [
+  { number: "33%", label: "Judgement Logic Automated", sub: "Mistake-detection logic removed from manual examiner judgement, standardizing evaluations." },
+  { number: "100%", label: "Regulatory Compliance", sub: "AI-driven SOPs and monitoring center eliminated mishandling and bribery risks." },
+  { number: "Surge", label: "Customer Satisfaction", sub: "Candidates reviewing AI-flagged test videos drove a significant improvement in satisfaction scores." },
+  { number: "Data-Driven", label: "Governance", sub: "Moved from anecdotal oversight to precise process monitoring and examiner performance evaluation." },
+];
+
 export default function SmartDriveTestingSystem() {
   return (
-    <div className="pt-20">
-      {/* Hero Banner */}
-      <section className="bg-gradient-to-br from-primary-600 to-primary-800 py-20 text-white">
-        <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+    <main style={{ background: "#FAF7F4" }} className="min-h-screen">
+
+      {/* Hero */}
+      <section
+        style={{ background: "linear-gradient(145deg, #C2553A 0%, #8B3320 100%)" }}
+        className="px-4 py-20 sm:px-6 lg:px-8"
+      >
+        <div className="mx-auto max-w-4xl">
           <Link
-            href="/#work"
-            className="mb-6 inline-flex items-center gap-2 text-sm text-white/80 hover:text-white"
+            href="/#projects"
+            className="mb-8 inline-flex items-center gap-2 text-sm font-medium transition-opacity hover:opacity-70"
+            style={{ color: "rgba(250,247,244,0.75)" }}
           >
-            <ArrowLeft size={16} /> Back to Portfolio
+            <ArrowLeft size={16} /> Back to Projects
           </Link>
-          <p className="mb-2 text-sm font-semibold tracking-wider uppercase text-primary-200">
+          <p className="mb-3 text-xs font-semibold uppercase tracking-widest" style={{ color: "#C9974A" }}>
             Case Study
           </p>
-          <h1 className="font-heading text-4xl font-bold lg:text-5xl">
-            Smart Drive Testing System
-          </h1>
-          <p className="mt-4 text-lg text-white/90">
-            AI-powered intelligent driver evaluation system for Dubai RTA
-          </p>
-          <div className="mt-6 flex flex-wrap gap-3">
+          <div className="flex flex-wrap gap-2 mb-5">
             {["AI/ML", "Computer Vision", "IoT", "Government", "Sensor Fusion"].map((tag) => (
-              <span
-                key={tag}
-                className="rounded-full bg-white/20 px-3 py-1 text-sm font-medium"
-              >
+              <span key={tag} className="rounded-full px-3 py-1 text-xs font-semibold"
+                style={{ background: "rgba(250,247,244,0.15)", color: "#FAF7F4" }}>
                 {tag}
               </span>
             ))}
           </div>
+          <h1 className="font-heading text-3xl font-bold leading-tight md:text-5xl" style={{ color: "#FAF7F4" }}>
+            Smart Drive Testing System
+          </h1>
+          <p className="mt-4 text-lg" style={{ color: "rgba(250,247,244,0.75)" }}>
+            AI-powered intelligent driver evaluation system — an &ldquo;AI co-pilot&rdquo; for Dubai RTA road test examiners using computer vision and sensor fusion to automate 33% of judgement logic.
+          </p>
+          <p className="mt-3 text-sm font-medium" style={{ color: "#C9974A" }}>
+            Client: Road Transport Authority (RTA) · Government of Dubai
+          </p>
         </div>
       </section>
 
-      {/* Content */}
-      <div className="mx-auto max-w-4xl px-4 py-16 sm:px-6 lg:px-8">
+      <div className="mx-auto max-w-4xl px-4 py-16 sm:px-6 lg:px-8 space-y-16">
+
         {/* Problem */}
-        <section className="mb-16">
-          <h2 className="font-heading mb-6 flex items-center gap-3 text-2xl font-bold text-gray-900">
-            <div className="rounded-lg bg-primary-50 p-2">
-              <BarChart3 className="text-primary-600" size={24} />
-            </div>
-            The Strategic Vision & Problem Statement
+        <section>
+          <h2 className="font-heading text-xs font-semibold uppercase tracking-widest mb-4" style={{ color: "#C2553A" }}>
+            The Challenge
           </h2>
-          <p className="leading-relaxed text-gray-700">
-            As the lead Product Manager, I spearheaded the digital transformation of the
-            Dubai RTA Driver Licensing process. The core challenge was the inherent subjectivity
-            and human bias in high-stakes road testing. Manual evaluations were susceptible to
-            examiner fatigue, mood, and situational oversights, leading to inconsistent results.
+          <h3 className="font-heading text-2xl font-bold mb-4" style={{ color: "#1C1410" }}>
+            Subjectivity and human bias in high-stakes road testing
+          </h3>
+          <p className="text-base leading-relaxed" style={{ color: "#4A3728" }}>
+            The Dubai RTA Driver Licensing process relied entirely on manual evaluation by human examiners. This created systemic risks: examiner fatigue, mood variation, and situational oversights led to inconsistent test results across candidates. The lack of objective data made grievance resolution difficult, and the department faced compliance risks from an anecdotal evaluation culture. There was no way to audit an examiner&apos;s decisions or demonstrate consistency to candidates who disputed their results.
           </p>
-          <p className="mt-4 leading-relaxed text-gray-700">
-            Furthermore, the lack of objective data made grievance resolution difficult and left
-            the department vulnerable to compliance risks and a &quot;hush money&quot; culture. My vision
-            was to replace subjective judgment with an evidence-based, AI-augmented workflow that
-            prioritized integrity and public trust.
+          <p className="mt-4 text-base leading-relaxed" style={{ color: "#4A3728" }}>
+            The vision was to replace subjective judgment with an evidence-based, AI-augmented workflow that prioritized integrity, transparency, and public trust — while keeping human examiners in the decision loop.
           </p>
+        </section>
+
+        {/* My Role */}
+        <section className="rounded-2xl p-8" style={{ background: "#F0E8DF" }}>
+          <h2 className="font-heading text-xs font-semibold uppercase tracking-widest mb-4" style={{ color: "#C2553A" }}>
+            My Role
+          </h2>
+          <h3 className="font-heading text-2xl font-bold mb-4" style={{ color: "#1C1410" }}>
+            Product Manager — full lifecycle ownership
+          </h3>
+          <ul className="space-y-3">
+            {[
+              "Defined the AI co-pilot product concept — framing it as augmenting examiners, not replacing them, to gain stakeholder buy-in",
+              "Orchestrated 9 cross-functional teams across Engineering, R&D, IoT, Sales, and Marketing",
+              "Translated legal and regulatory compliance requirements into product requirements and AI decision boundaries",
+              "Designed the video watermarking workflow and evidence chain for dispute resolution",
+              "Generated $5M in deal value by leading RFP solutioning and presenting to C-level RTA stakeholders",
+              "Transformed a project delivery scope into an investment-ready SaaS model with Lean Canvas and 5-year roadmap",
+            ].map((item, i) => (
+              <li key={i} className="flex items-start gap-3 text-sm leading-relaxed" style={{ color: "#4A3728" }}>
+                <CheckCircle2 size={15} className="mt-0.5 flex-shrink-0" style={{ color: "#C2553A" }} />
+                {item}
+              </li>
+            ))}
+          </ul>
         </section>
 
         {/* Solution */}
-        <section className="mb-16">
-          <h2 className="font-heading mb-6 flex items-center gap-3 text-2xl font-bold text-gray-900">
-            <div className="rounded-lg bg-primary-50 p-2">
-              <Shield className="text-primary-600" size={24} />
-            </div>
+        <section>
+          <h2 className="font-heading text-xs font-semibold uppercase tracking-widest mb-4" style={{ color: "#C2553A" }}>
             The Solution
           </h2>
-          <p className="leading-relaxed text-gray-700">
-            We shipped a Computer Vision and Sensor-Fusion analysis system designed as an
-            &quot;AI co-pilot&quot; that automatically detected critical driving errors and watermarked
-            them onto a synchronized video feed. This eliminated &quot;he-said, she-said&quot; disputes
-            by providing a single source of truth.
-          </p>
+          <h3 className="font-heading text-2xl font-bold mb-8" style={{ color: "#1C1410" }}>
+            An AI co-pilot that turns driving tests into verifiable data
+          </h3>
 
-          <div className="mt-8 rounded-xl bg-gray-50 p-6">
-            <h3 className="font-heading mb-4 text-lg font-bold text-gray-900">
-              Key Technical Components
-            </h3>
-            <ul className="space-y-3">
-              {[
-                "Computer Vision system for real-time driving error detection",
-                "Sensor-fusion integration (multiple IoT data sources)",
-                "Automated mistake-tagging with video watermarking",
-                "Real-time alert system for examiners and monitoring centers",
-                "Strict AI-driven SOPs and compliance framework",
-              ].map((item) => (
-                <li key={item} className="flex items-start gap-3 text-gray-700">
-                  <CheckCircle className="mt-0.5 flex-shrink-0 text-primary-500" size={18} />
-                  {item}
-                </li>
-              ))}
-            </ul>
-          </div>
-        </section>
-
-        {/* Users */}
-        <section className="mb-16">
-          <h2 className="font-heading mb-6 flex items-center gap-3 text-2xl font-bold text-gray-900">
-            <div className="rounded-lg bg-primary-50 p-2">
-              <Users className="text-primary-600" size={24} />
-            </div>
-            End-Users
-          </h2>
-          <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
-            <div className="rounded-xl border border-gray-200 bg-white p-6">
-              <h3 className="font-heading mb-2 font-bold text-gray-900">
-                Internal Stakeholders
-              </h3>
-              <p className="text-gray-600">
-                RTA Examiners and Monitoring Centers received real-time alerts
-                and automated mistake-tagging to support their evaluations.
-              </p>
-            </div>
-            <div className="rounded-xl border border-gray-200 bg-white p-6">
-              <h3 className="font-heading mb-2 font-bold text-gray-900">
-                External Customers
-              </h3>
-              <p className="text-gray-600">
-                The Dubai public gained transparency in their licensing journey,
-                with the ability to review AI-flagged test videos.
-              </p>
-            </div>
-          </div>
-        </section>
-
-        {/* Impact */}
-        <section className="mb-16">
-          <h2 className="font-heading mb-6 text-2xl font-bold text-gray-900">
-            Impact & Results
-          </h2>
-          <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
+          <div className="space-y-6">
             {[
               {
-                metric: "33%",
-                label: "Judgement Logic Automated",
-                description:
-                  "Successfully automated mistake-judgement logic, reducing cognitive load on examiners.",
+                icon: <Cpu size={22} />,
+                title: "Computer Vision & Sensor Fusion",
+                points: [
+                  "Real-time detection of critical driving errors via multiple camera feeds",
+                  "Sensor fusion combines vehicle telemetry, GPS, and vision data into a unified feed",
+                  "Automated mistake-tagging with timestamp and error classification",
+                  "Synchronized video watermarking — errors are permanently marked on the test recording",
+                ],
               },
               {
-                metric: "100%",
-                label: "Regulatory Compliance",
-                description:
-                  "AI-driven SOPs and monitoring center eliminated mishandling and bribery risks.",
+                icon: <Shield size={22} />,
+                title: "Compliance & Governance Layer",
+                points: [
+                  "AI-driven Standard Operating Procedures enforce consistent evaluation criteria",
+                  "Monitoring center receives real-time alerts on all error detections",
+                  "Full audit trail: every AI flag, examiner override, and test outcome recorded",
+                  "Candidate-facing transparency — test recordings with AI annotations available for review",
+                ],
               },
               {
-                metric: "Surge",
-                label: "Customer Happiness",
-                description:
-                  "Candidates reviewing AI-flagged test videos drove massive improvement in satisfaction scores.",
+                icon: <Users size={22} />,
+                title: "Examiner Experience",
+                points: [
+                  "AI acts as a co-pilot — flags errors, but examiner retains final authority",
+                  "Real-time dashboard shows AI confidence score per error flag",
+                  "Reduced cognitive load: examiner focuses on driving quality, AI handles error cataloguing",
+                  "Post-test summary with full AI-flagged event log for review",
+                ],
               },
-              {
-                metric: "Data-Driven",
-                label: "Governance",
-                description:
-                  "Authorities moved from anecdotal oversight to precise process monitoring and examiner evaluation.",
-              },
-            ].map((item) => (
-              <div
-                key={item.label}
-                className="rounded-xl border-l-4 border-primary-600 bg-white p-6 shadow-md"
-              >
-                <div className="font-heading text-2xl font-bold text-primary-600">
-                  {item.metric}
+            ].map((f) => (
+              <div key={f.title} className="rounded-2xl p-6" style={{ background: "#FFFFFF", border: "2px solid #F0E8DF" }}>
+                <div className="flex items-center gap-3 mb-4">
+                  <span className="rounded-lg p-2" style={{ background: "#C2553A", color: "#FAF7F4" }}>{f.icon}</span>
+                  <h4 className="font-heading font-bold text-lg" style={{ color: "#1C1410" }}>{f.title}</h4>
                 </div>
-                <div className="mt-1 font-semibold text-gray-900">
-                  {item.label}
-                </div>
-                <p className="mt-2 text-sm text-gray-600">
-                  {item.description}
-                </p>
+                <ul className="space-y-2">
+                  {f.points.map((pt, i) => (
+                    <li key={i} className="flex items-start gap-2.5 text-sm leading-relaxed" style={{ color: "#4A3728" }}>
+                      <span className="mt-1.5 h-1.5 w-1.5 flex-shrink-0 rounded-full" style={{ background: "#C2553A" }} />
+                      {pt}
+                    </li>
+                  ))}
+                </ul>
               </div>
             ))}
           </div>
         </section>
 
-        {/* CTA */}
-        <section className="rounded-xl bg-primary-50 p-8 text-center">
-          <h2 className="font-heading text-2xl font-bold text-gray-900">
-            Interested in similar product transformation?
+        {/* End Users */}
+        <section>
+          <h2 className="font-heading text-xs font-semibold uppercase tracking-widest mb-6" style={{ color: "#C2553A" }}>
+            End Users
           </h2>
-          <p className="mt-2 text-gray-600">
-            Let&apos;s discuss how I can help drive your product strategy and AI initiatives.
-          </p>
-          <div className="mt-6">
-            <Button href="/services" size="lg">
-              Connect for Services
-            </Button>
+          <div className="grid gap-4 sm:grid-cols-2">
+            {[
+              {
+                title: "Internal — RTA Examiners & Monitoring",
+                body: "Examiners receive real-time AI alerts and automated mistake-tagging. Monitoring centers gain live dashboards with compliance oversight across all active tests.",
+              },
+              {
+                title: "External — Dubai Public (Test Candidates)",
+                body: "Candidates can review AI-flagged test recordings, providing full transparency into their evaluation and a verifiable basis for any dispute or appeal.",
+              },
+            ].map((item) => (
+              <div key={item.title} className="rounded-2xl p-6" style={{ background: "#FFFFFF", border: "2px solid #F0E8DF" }}>
+                <h4 className="font-heading font-bold mb-2 text-base" style={{ color: "#1C1410" }}>{item.title}</h4>
+                <p className="text-sm leading-relaxed" style={{ color: "#4A3728" }}>{item.body}</p>
+              </div>
+            ))}
           </div>
         </section>
+
+        {/* Impact */}
+        <section className="rounded-2xl p-8" style={{ background: "#1C1410" }}>
+          <h2 className="font-heading text-xs font-semibold uppercase tracking-widest mb-4" style={{ color: "#C9974A" }}>
+            Impact & Results
+          </h2>
+          <h3 className="font-heading text-2xl font-bold mb-8" style={{ color: "#FAF7F4" }}>
+            From subjective evaluations to evidence-based governance
+          </h3>
+          <div className="grid gap-4 sm:grid-cols-2">
+            {impacts.map((item) => (
+              <div key={item.label} className="rounded-xl p-5"
+                style={{ background: "rgba(255,255,255,0.05)", border: "1px solid rgba(194,85,58,0.2)" }}>
+                <div className="font-heading text-3xl font-bold mb-1" style={{ color: "#E8956D" }}>{item.number}</div>
+                <p className="font-semibold text-sm mb-1" style={{ color: "#FAF7F4" }}>{item.label}</p>
+                <p className="text-xs" style={{ color: "rgba(250,247,244,0.55)" }}>{item.sub}</p>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        {/* Key Learnings */}
+        <section>
+          <h2 className="font-heading text-xs font-semibold uppercase tracking-widest mb-6" style={{ color: "#C2553A" }}>
+            Key Learnings
+          </h2>
+          <div className="grid gap-4 sm:grid-cols-3">
+            {[
+              { title: "Frame AI as augmentation, not replacement", body: "Positioning the system as an examiner co-pilot — not an autonomous judge — was the key to stakeholder acceptance from RTA leadership and examiners." },
+              { title: "Government products live and die on trust", body: "The video audit trail wasn't a feature — it was the entire value proposition for both the RTA and the public. Evidence is currency in government." },
+              { title: "9 teams need one shared north star", body: "Orchestrating Engineering, R&D, IoT, Sales, and Marketing required a single product vision document that every team could anchor decisions to." },
+            ].map((item) => (
+              <div key={item.title} className="rounded-2xl p-5" style={{ background: "#F0E8DF" }}>
+                <h4 className="font-heading font-bold text-sm mb-2" style={{ color: "#C2553A" }}>{item.title}</h4>
+                <p className="text-xs leading-relaxed" style={{ color: "#4A3728" }}>{item.body}</p>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        <div className="pt-4">
+          <Link href="/#projects" className="inline-flex items-center gap-2 rounded-lg px-5 py-2.5 text-sm font-semibold transition-all hover:-translate-y-0.5"
+            style={{ background: "#C2553A", color: "#FAF7F4" }}>
+            <ArrowLeft size={14} />
+            Back to All Projects
+          </Link>
+        </div>
       </div>
-    </div>
+    </main>
   );
 }

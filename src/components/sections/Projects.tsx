@@ -1,130 +1,140 @@
 "use client";
 
-import { motion } from "framer-motion";
-import { useInView } from "react-intersection-observer";
-import { ExternalLink, ArrowRight } from "lucide-react";
 import Link from "next/link";
+import { motion } from "framer-motion";
+import { ArrowRight, ExternalLink } from "lucide-react";
 import { PROJECTS } from "@/lib/constants";
-import SectionHeading from "@/components/ui/SectionHeading";
-import { staggerContainer, fadeInUp } from "@/lib/animations";
+import TiltCard from "@/components/ui/TiltCard";
 
-const tagColorClasses: Record<string, string> = {
-  green: "bg-emerald-50 text-emerald-700 border-emerald-200",
-  purple: "bg-violet-50 text-violet-700 border-violet-200",
-  gold: "bg-amber-50 text-amber-700 border-amber-200",
+const tagColorMap: Record<string, { bg: string; text: string }> = {
+  green:  { bg: "rgba(34,197,94,0.12)",  text: "#16a34a" },
+  purple: { bg: "rgba(139,92,246,0.12)", text: "#7c3aed" },
+  gold:   { bg: "rgba(201,151,74,0.18)", text: "#92600a" },
 };
 
 export default function Projects() {
-  const { ref, inView } = useInView({ triggerOnce: true, threshold: 0.1 });
-
-  const featuredProject = PROJECTS.find((p) => p.title === "HR Performance Calibration Tool");
-  const otherProjects = PROJECTS.filter((p) => p.title !== "HR Performance Calibration Tool");
-
   return (
-    <section id="projects" className="bg-gray-50 py-20 lg:py-28">
+    <section id="projects" style={{ background: "#FAF7F4" }} className="py-20 lg:py-28">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <SectionHeading
-          title="Projects & Clients"
-          subtitle="From government infrastructure to SaaS platforms — enterprise solutions with real-world impact."
-        />
 
+        {/* Header */}
         <motion.div
-          ref={ref}
-          initial="hidden"
-          animate={inView ? "visible" : "hidden"}
-          variants={staggerContainer}
+          initial={{ opacity: 0, y: 16 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5 }}
+          className="mb-14 text-center"
         >
-          {/* Featured AI Project */}
-          {featuredProject && (
-            <motion.div variants={fadeInUp} className="mb-8">
-              <a
-                href={featuredProject.link}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="group block"
-              >
-                <div className="relative overflow-hidden rounded-2xl border-2 border-primary-200 bg-gradient-to-r from-primary-50 to-violet-50 p-8 transition-all hover:border-primary-400 hover:shadow-lg">
-                  <div className="absolute top-4 right-4 rounded bg-primary-100 px-2.5 py-1 text-[10px] font-bold tracking-widest text-primary-700 uppercase">
-                    Featured Project
-                  </div>
-                  <div className="flex flex-col gap-6 md:flex-row md:items-center md:justify-between">
-                    <div className="max-w-2xl">
-                      <div className="mb-3 flex flex-wrap gap-2">
-                        {featuredProject.tags.map((tag, i) => (
-                          <span
-                            key={tag}
-                            className={`rounded border px-2 py-0.5 text-[10px] font-bold tracking-wide uppercase ${
-                              i === 0 ? tagColorClasses.green : i === 1 ? tagColorClasses.purple : tagColorClasses.gold
-                            }`}
-                          >
-                            {tag}
-                          </span>
-                        ))}
-                      </div>
-                      <h3 className="font-heading text-xl font-bold text-gray-900 lg:text-2xl">
-                        {featuredProject.title}
-                      </h3>
-                      <p className="mt-2 text-gray-600">{featuredProject.description}</p>
-                      <span className="mt-4 inline-flex items-center gap-2 font-semibold text-primary-600 transition-all group-hover:gap-3">
-                        View Live Project <ExternalLink size={16} />
-                      </span>
-                    </div>
-                    <div className="flex flex-col items-center text-center">
-                      <span className="text-5xl">🤖</span>
-                      <span className="mt-2 text-xs tracking-wide text-gray-400 uppercase">
-                        Deployed on Vercel
-                      </span>
-                      <span className="mt-2 text-xs tracking-wide text-gray-400 uppercase">
-                        DB on Supabase
-                      </span>
-                    </div>
-                  </div>
-                </div>
-              </a>
-            </motion.div>
-          )}
+          <span
+            className="mb-3 inline-block rounded-full px-3 py-1 text-xs font-semibold uppercase tracking-widest"
+            style={{ background: "#F0E8DF", color: "#C2553A" }}
+          >
+            Case Studies
+          </span>
+          <h2 className="font-heading text-3xl font-bold md:text-4xl" style={{ color: "#1C1410" }}>
+            Products I&apos;ve shipped
+          </h2>
+          <p className="mt-3 text-sm" style={{ color: "#8B6A52" }}>
+            Hover cards to explore · click to read the full case study
+          </p>
+        </motion.div>
 
-          {/* Project Grid */}
-          <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {otherProjects.map((project) => (
-              <motion.div key={project.title} variants={fadeInUp}>
-                <div className="group flex h-full flex-col rounded-xl border border-gray-200 bg-white p-6 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-primary-300 hover:shadow-md">
+        {/* Cards grid */}
+        <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+          {PROJECTS.map((project, i) => {
+            const colors = tagColorMap[project.tagColor ?? "gold"];
+            const hasLink = !!project.link;
+            const isExternal = project.type === "external";
+
+            const cardContent = (
+              <TiltCard
+                className="group flex h-full flex-col rounded-2xl overflow-hidden cursor-pointer"
+                style={{
+                  background: "#FFFFFF",
+                  border: "2px solid #F0E8DF",
+                  boxShadow: "0 2px 12px rgba(28,20,16,0.06)",
+                  transition: "border-color 0.2s, box-shadow 0.2s",
+                }}
+              >
+                <div className="flex flex-1 flex-col p-6">
+                  {/* Tags */}
                   <div className="mb-3 flex flex-wrap gap-1.5">
                     {project.tags.map((tag) => (
                       <span
                         key={tag}
-                        className={`rounded border px-2 py-0.5 text-[10px] font-bold tracking-wide uppercase ${
-                          tagColorClasses[project.tagColor || "green"]
-                        }`}
+                        className="rounded-full px-2.5 py-0.5 text-xs font-semibold"
+                        style={{ background: colors.bg, color: colors.text }}
                       >
                         {tag}
                       </span>
                     ))}
                   </div>
-                  <h3 className="font-heading text-base font-bold text-gray-900">
+
+                  {/* Title */}
+                  <h3 className="font-heading mb-2 text-base font-bold md:text-lg" style={{ color: "#1C1410" }}>
                     {project.title}
                   </h3>
-                  <p className="mt-2 flex-1 text-sm leading-relaxed text-gray-500">
+
+                  {/* Description */}
+                  <p className="flex-1 text-sm leading-relaxed" style={{ color: "#4A3728" }}>
                     {project.description}
                   </p>
+
+                  {/* Client */}
                   {project.client && (
-                    <p className="mt-3 text-xs font-semibold text-primary-600">
-                      📍 {project.client}
+                    <p className="mt-3 text-xs font-medium" style={{ color: "#8B6A52" }}>
+                      {project.client}
                     </p>
                   )}
-                  {project.link && project.type === "case-study" && (
-                    <Link
-                      href={project.link}
-                      className="mt-3 inline-flex items-center gap-1.5 text-sm font-semibold text-primary-600 transition-all hover:gap-2.5"
-                    >
-                      Read Case Study <ArrowRight size={14} />
-                    </Link>
-                  )}
                 </div>
+
+                {/* Footer CTA */}
+                {hasLink && (
+                  <div
+                    className="flex items-center justify-between border-t px-6 py-3 text-xs font-semibold transition-colors group-hover:bg-primary-50"
+                    style={{ borderColor: "#F0E8DF", color: "#C2553A" }}
+                  >
+                    <span>{isExternal ? "Live Project" : "View Case Study"}</span>
+                    {isExternal ? <ExternalLink size={14} /> : <ArrowRight size={14} />}
+                  </div>
+                )}
+              </TiltCard>
+            );
+
+            return (
+              <motion.div
+                key={project.title}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.45, delay: i * 0.07 }}
+                className="flex"
+                onMouseEnter={(e) => {
+                  const card = e.currentTarget.querySelector(".group") as HTMLElement;
+                  if (card) { card.style.borderColor = "#C2553A"; card.style.boxShadow = "0 8px 30px rgba(194,85,58,0.18)"; }
+                }}
+                onMouseLeave={(e) => {
+                  const card = e.currentTarget.querySelector(".group") as HTMLElement;
+                  if (card) { card.style.borderColor = "#F0E8DF"; card.style.boxShadow = "0 2px 12px rgba(28,20,16,0.06)"; }
+                }}
+              >
+                {hasLink ? (
+                  isExternal ? (
+                    <a href={project.link} target="_blank" rel="noopener noreferrer" className="flex flex-1">
+                      {cardContent}
+                    </a>
+                  ) : (
+                    <Link href={project.link} className="flex flex-1">
+                      {cardContent}
+                    </Link>
+                  )
+                ) : (
+                  <div className="flex flex-1">{cardContent}</div>
+                )}
               </motion.div>
-            ))}
-          </div>
-        </motion.div>
+            );
+          })}
+        </div>
       </div>
     </section>
   );

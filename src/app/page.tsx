@@ -1,25 +1,27 @@
+import HeroSection from "@/components/sections/HeroSection";
+import ImpactMarquee from "@/components/sections/ImpactMarquee";
 import About from "@/components/sections/About";
-import Stats from "@/components/sections/Stats";
 import Skills from "@/components/sections/Skills";
 import Experience from "@/components/sections/Experience";
 import Impact from "@/components/sections/Impact";
 import Projects from "@/components/sections/Projects";
-import ServicesOverview from "@/components/sections/ServicesOverview";
+import AIShowcase from "@/components/sections/AIShowcase";
 import Certifications from "@/components/sections/Certifications";
-import Contact from "@/components/sections/Contact";
+import BookingSection from "@/components/sections/BookingSection";
 
 export default function Home() {
   return (
     <>
+      <HeroSection />
+      <ImpactMarquee />
       <About />
-      <Stats />
       <Skills />
       <Experience />
       <Impact />
       <Projects />
-      <ServicesOverview />
+      <AIShowcase />
       <Certifications />
-      <Contact />
+      <BookingSection />
     </>
   );
 }
