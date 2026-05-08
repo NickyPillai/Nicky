@@ -4,7 +4,8 @@ import dynamic from "next/dynamic";
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { Linkedin, Github, Mail, ArrowDown, ChevronRight } from "lucide-react";
-import { SOCIAL_LINKS, HERO_STATS } from "@/lib/constants";
+import { SOCIAL_LINKS } from "@/lib/constants";
+import JourneyRoad from "@/components/sections/JourneyRoad";
 
 const Typewriter = dynamic(() => import("typewriter-effect"), { ssr: false });
 
@@ -45,7 +46,7 @@ export default function HeroSection() {
 
       {/* Main content */}
       <div className="relative flex flex-1 items-center">
-        <div className="mx-auto w-full max-w-7xl px-4 py-24 sm:px-6 lg:px-8 lg:py-32">
+        <div className="mx-auto w-full max-w-7xl px-4 py-12 sm:px-6 lg:px-8 lg:py-16">
           <div className="grid items-center gap-12 lg:grid-cols-2">
 
             {/* ── Left: Text ── */}
@@ -208,42 +209,8 @@ export default function HeroSection() {
         </div>
       </div>
 
-      {/* ── Stat row ── */}
-      <div className="relative pb-6">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.55, duration: 0.6 }}
-            className="grid grid-cols-2 gap-3 md:grid-cols-4"
-          >
-            {HERO_STATS.map((s) => (
-              <div
-                key={s.label}
-                className="rounded-xl p-4 text-center"
-                style={{
-                  background: "rgba(250,247,244,0.1)",
-                  border: "1px solid rgba(250,247,244,0.14)",
-                  backdropFilter: "blur(6px)",
-                }}
-              >
-                <div
-                  className="font-heading text-2xl font-bold md:text-3xl"
-                  style={{ color: "#FAF7F4" }}
-                >
-                  {s.number}
-                </div>
-                <div
-                  className="mt-1 text-xs leading-snug md:text-sm"
-                  style={{ color: "rgba(250,247,244,0.65)" }}
-                >
-                  {s.label}
-                </div>
-              </div>
-            ))}
-          </motion.div>
-        </div>
-      </div>
+      {/* ── Journey Road ── */}
+      <JourneyRoad />
 
       {/* Scroll indicator */}
       <div className="flex justify-center pb-5">

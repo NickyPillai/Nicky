@@ -75,3 +75,25 @@ body {
 .glow-pulse {
   animation: glowPulse 2.5s ease-in-out infinite;
 }
+
+/* Journey road — lane marking scroll */
+@keyframes roadDash {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+.animate-road-dash {
+  animation: roadDash 5s linear infinite;
+}
+@media (prefers-reduced-motion: reduce) {
+  .animate-road-dash { animation: none; }
+  .animate-walk-bob  { animation: none; }
+}
+
+/* Journey road — avatar walking bob */
+@keyframes walkBob {
+  0%, 100% { transform: translateY(0px); }
+  50%       { transform: translateY(-5px); }
+}
+.animate-walk-bob {
+  animation: walkBob 0.45s ease-in-out infinite;
+}
