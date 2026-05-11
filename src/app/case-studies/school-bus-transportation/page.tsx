@@ -205,9 +205,7 @@ export default function SchoolBusCase() {
               </div>
             ))}
           </div>
-          <p className="mt-6 text-xs" style={{ color: "rgba(250,247,244,0.35)" }}>
-            * Impact estimates based on industry benchmarks for smart school bus management deployments.
-          </p>
+          
         </section>
 
         {/* Key Learnings */}

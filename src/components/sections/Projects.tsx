@@ -6,12 +6,6 @@ import { ArrowRight, ExternalLink } from "lucide-react";
 import { PROJECTS } from "@/lib/constants";
 import TiltCard from "@/components/ui/TiltCard";
 
-const tagColorMap: Record<string, { bg: string; text: string }> = {
-  green:  { bg: "rgba(34,197,94,0.12)",  text: "#16a34a" },
-  purple: { bg: "rgba(139,92,246,0.12)", text: "#7c3aed" },
-  gold:   { bg: "rgba(201,151,74,0.18)", text: "#92600a" },
-};
-
 export default function Projects() {
   return (
     <section id="projects" style={{ background: "#FAF7F4" }} className="py-20 lg:py-28">
@@ -42,7 +36,6 @@ export default function Projects() {
         {/* Cards grid */}
         <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
           {PROJECTS.map((project, i) => {
-            const colors = tagColorMap[project.tagColor ?? "gold"];
             const hasLink = !!project.link;
             const isExternal = project.type === "external";
 
@@ -57,35 +50,29 @@ export default function Projects() {
                 }}
               >
                 <div className="flex flex-1 flex-col p-6">
-                  {/* Tags */}
-                  <div className="mb-3 flex flex-wrap gap-1.5">
-                    {project.tags.map((tag) => (
-                      <span
-                        key={tag}
-                        className="rounded-full px-2.5 py-0.5 text-xs font-semibold"
-                        style={{ background: colors.bg, color: colors.text }}
-                      >
-                        {tag}
-                      </span>
-                    ))}
-                  </div>
+                  {/* Client — top, gold */}
+                  {project.client && (
+                    <p className="mb-2 text-xs font-semibold" style={{ color: "#C9974A" }}>
+                      {project.client}
+                    </p>
+                  )}
 
                   {/* Title */}
-                  <h3 className="font-heading mb-2 text-base font-bold md:text-lg" style={{ color: "#1C1410" }}>
+                  <h3 className="font-heading mb-3 text-base font-bold leading-snug" style={{ color: "#1C1410" }}>
                     {project.title}
                   </h3>
+
+                  {/* Impact — big stat */}
+                  {project.impact && (
+                    <p className="font-heading mb-3 text-2xl font-bold leading-tight" style={{ color: "#1B2D5A" }}>
+                      {project.impact}
+                    </p>
+                  )}
 
                   {/* Description */}
                   <p className="flex-1 text-sm leading-relaxed" style={{ color: "#4A3728" }}>
                     {project.description}
                   </p>
-
-                  {/* Client */}
-                  {project.client && (
-                    <p className="mt-3 text-xs font-medium" style={{ color: "#8B6A52" }}>
-                      {project.client}
-                    </p>
-                  )}
                 </div>
 
                 {/* Footer CTA */}

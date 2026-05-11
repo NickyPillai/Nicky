@@ -15,9 +15,9 @@ export default function Home() {
       <HeroSection />
       <ImpactMarquee />
       <About />
+      <Impact />
       <Skills />
       <Experience />
-      <Impact />
       <Projects />
       <AIShowcase />
       <Certifications />

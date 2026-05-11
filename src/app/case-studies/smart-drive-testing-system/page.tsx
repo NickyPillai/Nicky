@@ -69,7 +69,7 @@ export default function SmartDriveTestingSystem() {
             The Dubai RTA Driver Licensing process relied entirely on manual evaluation by human examiners. This created systemic risks: examiner fatigue, mood variation, and situational oversights led to inconsistent test results across candidates. The lack of objective data made grievance resolution difficult, and the department faced compliance risks from an anecdotal evaluation culture. There was no way to audit an examiner&apos;s decisions or demonstrate consistency to candidates who disputed their results.
           </p>
           <p className="mt-4 text-base leading-relaxed" style={{ color: "#4A3728" }}>
-            The vision was to replace subjective judgment with an evidence-based, AI-augmented workflow that prioritized integrity, transparency, and public trust — while keeping human examiners in the decision loop.
+            The vision was to replace subjective judgment with an evidence-based, data backed workflow that prioritized integrity, transparency, and public trust — while keeping human examiners in the decision loop.
           </p>
         </section>
 
@@ -83,9 +83,9 @@ export default function SmartDriveTestingSystem() {
           </h3>
           <ul className="space-y-3">
             {[
-              "Defined the AI co-pilot product concept — framing it as augmenting examiners, not replacing them, to gain stakeholder buy-in",
+              "Defined the co-pilot product concept — framing it as augmenting examiners, not replacing them, to gain stakeholder buy-in",
               "Orchestrated 9 cross-functional teams across Engineering, R&D, IoT, Sales, and Marketing",
-              "Translated legal and regulatory compliance requirements into product requirements and AI decision boundaries",
+              "Translated legal and regulatory compliance requirements into product requirements and decision boundaries",
               "Designed the video watermarking workflow and evidence chain for dispute resolution",
               "Generated $5M in deal value by leading RFP solutioning and presenting to C-level RTA stakeholders",
               "Transformed a project delivery scope into an investment-ready SaaS model with Lean Canvas and 5-year roadmap",
@@ -104,7 +104,7 @@ export default function SmartDriveTestingSystem() {
             The Solution
           </h2>
           <h3 className="font-heading text-2xl font-bold mb-8" style={{ color: "#1C1410" }}>
-            An AI co-pilot that turns driving tests into verifiable data
+            A co-pilot that turns driving tests into verifiable data
           </h3>
 
           <div className="space-y-6">
@@ -123,20 +123,19 @@ export default function SmartDriveTestingSystem() {
                 icon: <Shield size={22} />,
                 title: "Compliance & Governance Layer",
                 points: [
-                  "AI-driven Standard Operating Procedures enforce consistent evaluation criteria",
+                  "Standard Operating Procedures enforce consistent evaluation criteria",
                   "Monitoring center receives real-time alerts on all error detections",
-                  "Full audit trail: every AI flag, examiner override, and test outcome recorded",
-                  "Candidate-facing transparency — test recordings with AI annotations available for review",
+                  "Full audit trail: every flag, examiner override, and test outcome recorded",
+                  "Candidate-facing transparency — test recordings with parameter annotations available for review",
                 ],
               },
               {
                 icon: <Users size={22} />,
                 title: "Examiner Experience",
                 points: [
-                  "AI acts as a co-pilot — flags errors, but examiner retains final authority",
-                  "Real-time dashboard shows AI confidence score per error flag",
-                  "Reduced cognitive load: examiner focuses on driving quality, AI handles error cataloguing",
-                  "Post-test summary with full AI-flagged event log for review",
+                  "Product acts as a co-pilot — flags errors, but examiner retains final authority",
+                  "Reduced cognitive load: examiner focuses on driving quality, product handles error cataloguing",
+                  "Post-test summary with full data based flagged event log for review",
                 ],
               },
             ].map((f) => (
@@ -167,11 +166,11 @@ export default function SmartDriveTestingSystem() {
             {[
               {
                 title: "Internal — RTA Examiners & Monitoring",
-                body: "Examiners receive real-time AI alerts and automated mistake-tagging. Monitoring centers gain live dashboards with compliance oversight across all active tests.",
+                body: "Examiners receive real-time alerts and automated mistake-tagging. Monitoring centers gain live dashboards with compliance oversight across all active tests.",
               },
               {
                 title: "External — Dubai Public (Test Candidates)",
-                body: "Candidates can review AI-flagged test recordings, providing full transparency into their evaluation and a verifiable basis for any dispute or appeal.",
+                body: "Candidates can review product-flagged test recordings, providing full transparency into their evaluation and a verifiable basis for any dispute or appeal.",
               },
             ].map((item) => (
               <div key={item.title} className="rounded-2xl p-6" style={{ background: "#FFFFFF", border: "2px solid #F0E8DF" }}>
@@ -209,7 +208,7 @@ export default function SmartDriveTestingSystem() {
           </h2>
           <div className="grid gap-4 sm:grid-cols-3">
             {[
-              { title: "Frame AI as augmentation, not replacement", body: "Positioning the system as an examiner co-pilot — not an autonomous judge — was the key to stakeholder acceptance from RTA leadership and examiners." },
+              { title: "Frame AI and systems as augmentation, not replacement", body: "Positioning the system as an examiner co-pilot — not an autonomous judge — was the key to stakeholder acceptance from RTA leadership and examiners." },
               { title: "Government products live and die on trust", body: "The video audit trail wasn't a feature — it was the entire value proposition for both the RTA and the public. Evidence is currency in government." },
               { title: "9 teams need one shared north star", body: "Orchestrating Engineering, R&D, IoT, Sales, and Marketing required a single product vision document that every team could anchor decisions to." },
             ].map((item) => (

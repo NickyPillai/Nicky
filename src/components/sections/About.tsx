@@ -38,7 +38,7 @@ export default function About() {
         </motion.div>
 
         {/* Split layout */}
-        <div className="grid items-start gap-12 lg:grid-cols-2 lg:gap-20">
+        <div className="grid items-start gap-12 lg:gap-16" style={{ gridTemplateColumns: "minmax(0,5fr) minmax(0,7fr)" }}>
 
           {/* Left: Avatar only */}
           <motion.div
@@ -71,7 +71,7 @@ export default function About() {
             transition={{ duration: 0.6, delay: 0.1 }}
             className="flex flex-col gap-6"
           >
-            <div className="space-y-4 text-base leading-relaxed md:text-lg" style={{ color: "#4A3728" }}>
+            <div className="space-y-3 text-sm leading-relaxed md:text-base" style={{ color: "#4A3728" }}>
               {ABOUT_BIO.map((para, i) => (
                 <p key={i} dangerouslySetInnerHTML={{ __html: para }} />
               ))}

@@ -13,6 +13,7 @@ export interface Skill {
 export interface Project {
   title: string;
   description: string;
+  impact?: string;
   link: string;
   type: "case-study" | "external";
   tags: string[];

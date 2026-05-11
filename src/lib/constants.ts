@@ -36,9 +36,11 @@ export const STATS: Stat[] = [
 ];
 
 export const ABOUT_BIO = [
-  "I'm a <strong>Digital Product Manager</strong> with 14 years of tech experience — 9 years dedicated to full-cycle product management. I've worked across <strong>SaaS, HRMS, Telematics, and Smart Mobility</strong>, delivering B2B and B2G solutions that create measurable business value.",
-  "My background as a software developer gives me an edge: I speak the language of engineering teams while staying firmly anchored in <strong>customer problems and business outcomes</strong>. I've shipped MVPs, sunset legacy products, led AI integrations, and scaled platforms to 40,000+ users.",
-  "I hold certifications in <strong>CSM, CSPO, and SAFe® PM/PO</strong>, and I'm a hands-on practitioner of Agile, Scrum, and data-driven prioritization. Based in Dubai and open to regional and global opportunities.",
+  "Most PMs can tell you what to build. Fewer can tell you why it'll fail before you build it.",
+  "Fourteen years ago, I was a developer wondering why requirements were right on paper but disconnected from the people they served. That question led me into product and I have spent 9 years making sure they aren't.",
+  "Since then MVPs shipped, legacy systems retired, PoCs turned into production, automated operations and replaced manual processes with things people actually want to use. I enjoy messy problems and rooms full of strong opinions. I take ownership seriously, celebrate the wins, stand in front of the misses, fix it and move forward together.",
+  "Right now I am deep in the AI wave, building with LLMs, experimenting with agentic workflows, prototyping with tools that didn't exist a year ago. Relentless pace. Genuinely exciting phase.",
+  "<strong>CSM. CSPO. SAFe® PM/PO.</strong> Dubai-based. Building things worth building and having a good time doing it.",
 ];
 
 export const ABOUT_HIGHLIGHTS: Highlight[] = [
@@ -240,62 +242,68 @@ export const PROJECTS: Project[] = [
   {
     title: "Smart Drive Testing System",
     description:
-      "AI co-pilot for road test examiners integrating computer vision and sensor fusion, automating 33% of examiner judgement logic and standardizing licensing evaluations for Dubai RTA.",
+      "AI co-pilot for road test examiners integrating computer vision and sensor fusion, standardizing licensing evaluations for Dubai RTA — the UAE's most critical licensing authority.",
+    impact: "33% judgement logic automated",
     link: "/case-studies/smart-drive-testing-system",
     type: "case-study",
-    tags: ["AI", "Computer Vision", "Gov"],
-    client: "Dubai RTA · Government of Dubai",
+    tags: ["IoT", "Telematics", "Computer Vision", "Gov"],
+    client: "Dubai RTA · Govt of Dubai",
     tagColor: "green",
+  },
+  {
+    title: "Fleet & Logistics Management",
+    description:
+      "End-to-end fleet optimisation, real-time tracking, driver allocation, and route intelligence at enterprise scale.",
+    impact: "2 hrs → 15 min daily planning",
+    link: "/case-studies/fleet-logistics-management",
+    type: "case-study",
+    tags: ["Fleet", "Logistics", "Enterprise"],
+    client: "Etisalat (e&) · Telecom",
+    tagColor: "gold",
+  },
+  {
+    title: "Shift & Scheduling Module",
+    description:
+      "Net-new module unlocking Logistics and Retail verticals through phased MVP delivery, with built-in leave, hours, and location conflict validation.",
+    impact: "27% TAM expansion",
+    link: "/case-studies/shift-scheduling",
+    type: "case-study",
+    tags: ["HRMS", "SaaS"],
+    client: "Yomly · B2B HRMS SaaS",
+    tagColor: "purple",
   },
   {
     title: "School Bus Transportation System",
     description:
-      "End-to-end smart transportation solution for parents, drivers, and attendants with real-time GPS, IoT safety devices, geofence automation, and an enterprise admin portal.",
+      "Live trip tracking for parents, complex multi-child payment engine, and full audit transparency for operations — with IoT safety devices and geofence automation.",
+    impact: "~70% fewer parent escalations",
     link: "/case-studies/school-bus-transportation",
     type: "case-study",
     tags: ["IoT", "Fleet", "Mobile"],
-    client: "Dubai Taxi Corporation",
+    client: "Dubai Taxi Corp · UAE",
     tagColor: "purple",
   },
   {
     title: "Roadside Recovery Assistance",
     description:
-      "Uber-style on-demand roadside assistance platform with public app, dispatch app, and auto-dispatch algorithm — reducing average response time by ~40%.",
+      "Real-time GPS fleet tracking and self-service mobile dispatch app. Average response time under 12 minutes.",
+    impact: "~65% faster incident response",
     link: "/case-studies/roadside-recovery",
     type: "case-study",
     tags: ["Transport", "SaaS"],
-    client: "Emirates Transport",
+    client: "Emirates Transport · UAE",
     tagColor: "gold",
   },
   {
     title: "Rent-a-Car Management System",
     description:
-      "Dynamic rental agreement and invoicing platform with Salik/fines integration, live GPS tracking, and insurance claim support for a major UAE transport authority.",
+      "Instant contracts with live availability, auto pro-rata billing, and Salik/fine sync. Zero manual errors.",
+    impact: "~80% less admin processing",
     link: "/case-studies/rent-a-car",
     type: "case-study",
     tags: ["Transport", "FinTech"],
-    client: "Emirates Transport",
+    client: "Emirates Transport · UAE",
     tagColor: "green",
-  },
-  {
-    title: "Shift & Scheduling Module",
-    description:
-      "Flexible scheduling module for operationally complex verticals — Logistics and Retail — expanding Yomly's TAM by 27% through phased MVP delivery.",
-    link: "",
-    type: "case-study",
-    tags: ["HRMS", "SaaS"],
-    client: "Yomly · B2B HRMS Platform",
-    tagColor: "purple",
-  },
-  {
-    title: "AI Driving Analysis Platform",
-    description:
-      "B2B telematics platform built from concept using NPI governance, integrating IoT hardware, firmware, and software into a cohesive product ecosystem for driving behaviour analytics.",
-    link: "",
-    type: "case-study",
-    tags: ["IoT", "Telematics"],
-    client: "Dubai Technologies",
-    tagColor: "gold",
   },
 ];
 
@@ -309,28 +317,12 @@ export const AI_PROJECTS: AIProject[] = [
     status: "live",
   },
   {
-    title: "HoReCa Website Revamp Prototype",
-    description:
-      "A restaurant & hospitality sector website prototype demonstrating modern digital experience design — customer-focused UX for the F&B industry, built with AI-assisted vibe coding.",
-    techTags: ["Next.js", "Vibe Coding", "UX Design"],
-    link: "https://restaurant-store-prototype.vercel.app/",
-    status: "live",
-  },
-  {
-    title: "Email & Brief Drafter",
-    description:
-      "An AI tool that writes a tailored job application email and explains why you are apt for the role — based on the job title and description you provide.",
-    techTags: ["AI/LLM", "Lovable", "Prompt Engineering"],
-    link: "https://ai-profile-draft.lovable.app/",
-    status: "live",
-  },
-  {
     title: "Kindergarten Worksheet Generator",
     description:
       "Generates age-appropriate worksheets with developmental activities for early childhood education, aligned to India Education Department's unMuk guidelines.",
     techTags: ["AI/LLM", "Education Tech", "RAG"],
-    link: "",
-    status: "in-progress",
+    link: "https://kindergarten-worksheet-generator-omega.vercel.app/",
+    status: "live",
   },
 ];
 

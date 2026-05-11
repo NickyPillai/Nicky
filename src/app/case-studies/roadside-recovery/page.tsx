@@ -177,9 +177,7 @@ export default function RoadsideRecoveryCase() {
               </div>
             ))}
           </div>
-          <p className="mt-6 text-xs" style={{ color: "rgba(250,247,244,0.35)" }}>
-            * Impact estimates based on industry benchmarks for on-demand roadside assistance platforms.
-          </p>
+         
         </section>
 
         {/* Key Learnings */}
