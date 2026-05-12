@@ -103,11 +103,28 @@ export default function HeroSection() {
 
               {/* One-liner */}
               <p
-                className="mb-8 max-w-md text-base leading-relaxed md:text-lg"
+                className="mb-5 max-w-md text-base leading-relaxed md:text-lg"
                 style={{ color: "rgba(250,247,244,0.7)" }}
               >
                 14 years in tech · 9 in product
               </p>
+
+              {/* Certification badges */}
+              <div className="mb-8 flex flex-wrap gap-2">
+                {["CSM", "CSPO", "SAFe® POPM"].map((cert) => (
+                  <span
+                    key={cert}
+                    className="inline-flex items-center rounded-full px-3 py-1 text-xs font-semibold tracking-wide"
+                    style={{
+                      background: "rgba(250,247,244,0.15)",
+                      border: "1px solid rgba(250,247,244,0.35)",
+                      color: "#FAF7F4",
+                    }}
+                  >
+                    {cert}
+                  </span>
+                ))}
+              </div>
 
               {/* CTAs */}
               <div className="mb-8 flex flex-wrap gap-3">
