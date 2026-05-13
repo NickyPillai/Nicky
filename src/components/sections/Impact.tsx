@@ -90,98 +90,72 @@ function GaugeArc({
   );
 }
 
-/* ── Panel 2: Concentric rings ─────────────────────────────────── */
-function ConcentricRings({
+/* ── Panel 2: Bubble chart ─────────────────────────────────────── */
+const BUBBLE_DIAMETERS = [148, 104, 88];
+const BUBBLE_OFFSETS: [number, number][] = [
+  [0, 0],    // top-left
+  [95, 130], // center, shifted right & down
+  [168, 222], // bottom-right
+];
+
+function BubbleChart({
   metrics,
-  color,
   active,
 }: {
   metrics: { value: number; pct: number; prefix?: string; suffix?: string; label: string }[];
   color: string;
   active: boolean;
 }) {
-  const radii = [90, 62, 38];
-  const strokeW = 8;
-  const cx = 110;
-  const cy = 110;
-  const svgSize = 220;
-
   return (
-    <div className="flex flex-col items-center gap-4">
-      <div className="relative" style={{ width: svgSize, height: svgSize }}>
-        <svg width={svgSize} height={svgSize}>
-          {metrics.map((m, i) => {
-            const r = radii[i];
-            const circ = 2 * Math.PI * r;
-            const dash = (m.pct / 100) * circ;
-            return (
-              <g key={i}>
-                {/* Track */}
-                <circle
-                  cx={cx}
-                  cy={cy}
-                  r={r}
-                  fill="none"
-                  stroke="rgba(255,255,255,0.07)"
-                  strokeWidth={strokeW}
-                />
-                {/* Fill — starts at top (-90°) */}
-                <circle
-                  cx={cx}
-                  cy={cy}
-                  r={r}
-                  fill="none"
-                  stroke={color}
-                  strokeWidth={strokeW}
-                  strokeLinecap="round"
-                  strokeDasharray={`${circ} ${circ}`}
-                  strokeDashoffset={active ? circ - dash : circ}
-                  transform={`rotate(-90 ${cx} ${cy})`}
-                  style={{
-                    transition: `stroke-dashoffset 1.3s ease-out ${0.15 + i * 0.15}s`,
-                    opacity: 1 - i * 0.1,
-                  }}
-                />
-              </g>
-            );
-          })}
-        </svg>
-        {/* Center label stack */}
-        <div className="absolute inset-0 flex flex-col items-center justify-center gap-0.5">
-          {metrics.map((m, i) => (
-            <div key={i} className="text-center">
-              <span
-                className={`font-heading font-bold leading-none ${i === 0 ? "text-lg" : "text-sm"}`}
-                style={{ color: i === 0 ? color : `${color}99` }}
-              >
-                {active ? (
-                  <>
-                    {m.prefix}
-                    <CountUp end={m.value} duration={1.5 - i * 0.1} decimals={0} />
-                    {m.suffix}
-                  </>
-                ) : (
-                  `${m.prefix ?? ""}${m.value}${m.suffix ?? ""}`
-                )}
-              </span>
+    <div className="relative w-full" style={{ height: 316 }}>
+      {metrics.map((m, i) => {
+        const dia = BUBBLE_DIAMETERS[i];
+        const [left, top] = BUBBLE_OFFSETS[i];
+        const fontSize = i === 0 ? "1.25rem" : i === 1 ? "1rem" : "0.8rem";
+        const labelSize = i === 0 ? "0.65rem" : "0.6rem";
+
+        return (
+          <motion.div
+            key={i}
+            initial={{ scale: 0, opacity: 0 }}
+            animate={active ? { scale: 1, opacity: 1 } : { scale: 0, opacity: 0 }}
+            transition={{ duration: 0.55, delay: 0.1 + i * 0.14, ease: "backOut" }}
+            className="absolute flex flex-col items-center justify-center rounded-full text-center"
+            style={{
+              width: dia,
+              height: dia,
+              top,
+              left,
+              background: `radial-gradient(circle at 35% 35%, #F0A882, #C2553A)`,
+              boxShadow: i === 0
+                ? "0 0 40px rgba(232,149,109,0.35), inset 0 1px 0 rgba(255,255,255,0.15)"
+                : "0 0 20px rgba(232,149,109,0.2), inset 0 1px 0 rgba(255,255,255,0.1)",
+              padding: "10px",
+            }}
+          >
+            <div
+              className="font-heading font-bold leading-none"
+              style={{ color: "#FAF7F4", fontSize }}
+            >
+              {active ? (
+                <>
+                  {m.prefix}
+                  <CountUp end={m.value} duration={1.4 + i * 0.1} decimals={0} />
+                  {m.suffix}
+                </>
+              ) : (
+                `${m.prefix ?? ""}${m.value}${m.suffix ?? ""}`
+              )}
             </div>
-          ))}
-        </div>
-      </div>
-      {/* Legend */}
-      <div className="flex flex-col gap-1.5 w-full">
-        {metrics.map((m, i) => (
-          <div key={i} className="flex items-center gap-2">
-            <span
-              className="h-2 w-2 shrink-0 rounded-full"
-              style={{ background: color, opacity: 1 - i * 0.25 }}
-            />
-            <span className="text-xs" style={{ color: "rgba(250,247,244,0.55)" }}>
+            <div
+              className="mt-1 leading-tight"
+              style={{ color: "rgba(250,247,244,0.8)", fontSize: labelSize }}
+            >
               {m.label}
-            </span>
-          </div>
-        ))}
-      </div>
+            </div>
+          </motion.div>
+        );
+      })}
     </div>
   );
 }
@@ -259,7 +233,7 @@ const GROUPS = [
     title: "Efficiency & Automation",
     color: "#E8956D",
     elevated: true,
-    chart: "rings" as const,
+    chart: "bubbles" as const,
     metrics: [
       { value: 90, pct: 90, prefix: "", suffix: "%", label: "Documentation Time Saved" },
       { value: 50, pct: 50, prefix: "~", suffix: "%", label: "Payroll Discrepancies Reduced" },
@@ -351,8 +325,8 @@ function GroupPanel({ group, index }: { group: (typeof GROUPS)[0]; index: number
             />
           </div>
         )}
-        {group.chart === "rings" && (
-          <ConcentricRings metrics={group.metrics} color={group.color} active={active} />
+        {group.chart === "bubbles" && (
+          <BubbleChart metrics={group.metrics} color={group.color} active={active} />
         )}
         {group.chart === "lollipop" && (
           <LollipopChart metrics={group.metrics} color={group.color} active={active} />
