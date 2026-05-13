@@ -90,16 +90,13 @@ function GaugeArc({
   );
 }
 
-/* ── Panel 2: Bubble chart ─────────────────────────────────────── */
-const BUBBLE_DIAMETERS = [148, 104, 88];
-const BUBBLE_OFFSETS: [number, number][] = [
-  [0, 0],    // top-left
-  [95, 130], // center, shifted right & down
-  [168, 222], // bottom-right
-];
+/* ── Panel 2: Test tube (liquid fill) chart ────────────────────── */
+const TUBE_HEIGHT = 160;
+const TUBE_WIDTH = 60;
 
-function BubbleChart({
+function TestTubeChart({
   metrics,
+  color,
   active,
 }: {
   metrics: { value: number; pct: number; prefix?: string; suffix?: string; label: string }[];
@@ -107,55 +104,77 @@ function BubbleChart({
   active: boolean;
 }) {
   return (
-    <div className="relative w-full" style={{ height: 316 }}>
-      {metrics.map((m, i) => {
-        const dia = BUBBLE_DIAMETERS[i];
-        const [left, top] = BUBBLE_OFFSETS[i];
-        const fontSize = i === 0 ? "1.25rem" : i === 1 ? "1rem" : "0.8rem";
-        const labelSize = i === 0 ? "0.65rem" : "0.6rem";
+    <div className="flex items-end justify-center gap-5 w-full pb-2">
+      {metrics.map((m, i) => (
+        <div key={i} className="flex flex-col items-center gap-2">
+          {/* Stat number */}
+          <div className="font-heading font-bold text-lg leading-none" style={{ color }}>
+            {active ? (
+              <>
+                {m.prefix}
+                <CountUp end={m.value} duration={1.3 + i * 0.1} decimals={0} />
+                {m.suffix}
+              </>
+            ) : (
+              `${m.prefix ?? ""}${m.value}${m.suffix ?? ""}`
+            )}
+          </div>
 
-        return (
-          <motion.div
-            key={i}
-            initial={{ scale: 0, opacity: 0 }}
-            animate={active ? { scale: 1, opacity: 1 } : { scale: 0, opacity: 0 }}
-            transition={{ duration: 0.55, delay: 0.1 + i * 0.14, ease: "backOut" }}
-            className="absolute flex flex-col items-center justify-center rounded-full text-center"
+          {/* Tube */}
+          <div
+            className="relative overflow-hidden"
             style={{
-              width: dia,
-              height: dia,
-              top,
-              left,
-              background: `radial-gradient(circle at 35% 35%, #F0A882, #C2553A)`,
-              boxShadow: i === 0
-                ? "0 0 40px rgba(232,149,109,0.35), inset 0 1px 0 rgba(255,255,255,0.15)"
-                : "0 0 20px rgba(232,149,109,0.2), inset 0 1px 0 rgba(255,255,255,0.1)",
-              padding: "10px",
+              width: TUBE_WIDTH,
+              height: TUBE_HEIGHT,
+              borderRadius: 999,
+              background: "rgba(255,255,255,0.05)",
+              border: `1px solid ${color}40`,
             }}
           >
+            {/* Tick marks */}
+            {[25, 50, 75].map((tick) => (
+              <div
+                key={tick}
+                className="absolute w-2 right-1"
+                style={{
+                  bottom: `${tick}%`,
+                  height: 1,
+                  background: "rgba(255,255,255,0.12)",
+                }}
+              />
+            ))}
+            {/* Liquid fill — rises from bottom */}
             <div
-              className="font-heading font-bold leading-none"
-              style={{ color: "#FAF7F4", fontSize }}
+              className="absolute bottom-0 w-full"
+              style={{
+                height: active ? `${m.pct}%` : "0%",
+                background: `linear-gradient(to top, ${color}CC, ${color}EE)`,
+                transition: `height 1.3s ease-out ${i * 0.18}s`,
+                borderRadius: "0 0 999px 999px",
+              }}
             >
-              {active ? (
-                <>
-                  {m.prefix}
-                  <CountUp end={m.value} duration={1.4 + i * 0.1} decimals={0} />
-                  {m.suffix}
-                </>
-              ) : (
-                `${m.prefix ?? ""}${m.value}${m.suffix ?? ""}`
-              )}
+              {/* Sheen on the fill */}
+              <div
+                className="absolute top-0 left-1/4 rounded-full"
+                style={{
+                  width: "30%",
+                  height: "30%",
+                  background: "rgba(255,255,255,0.18)",
+                  filter: "blur(4px)",
+                }}
+              />
             </div>
-            <div
-              className="mt-1 leading-tight"
-              style={{ color: "rgba(250,247,244,0.8)", fontSize: labelSize }}
-            >
-              {m.label}
-            </div>
-          </motion.div>
-        );
-      })}
+          </div>
+
+          {/* Label */}
+          <p
+            className="text-center leading-tight"
+            style={{ color: "rgba(250,247,244,0.55)", fontSize: "0.62rem", maxWidth: TUBE_WIDTH + 12 }}
+          >
+            {m.label}
+          </p>
+        </div>
+      ))}
     </div>
   );
 }
@@ -216,11 +235,13 @@ function LollipopChart({
 }
 
 /* ── Group panel wrapper ───────────────────────────────────────── */
+const ACCENT = "#C2553A";
+
 const GROUPS = [
   {
     icon: TrendingUp,
     title: "Revenue & Growth",
-    color: "#C9974A",
+    color: ACCENT,
     elevated: false,
     chart: "gauge" as const,
     metrics: [
@@ -231,9 +252,9 @@ const GROUPS = [
   {
     icon: Bot,
     title: "Efficiency & Automation",
-    color: "#E8956D",
+    color: ACCENT,
     elevated: true,
-    chart: "bubbles" as const,
+    chart: "tubes" as const,
     metrics: [
       { value: 90, pct: 90, prefix: "", suffix: "%", label: "Documentation Time Saved" },
       { value: 50, pct: 50, prefix: "~", suffix: "%", label: "Payroll Discrepancies Reduced" },
@@ -243,7 +264,7 @@ const GROUPS = [
   {
     icon: Zap,
     title: "Delivery & Quality",
-    color: "#C2553A",
+    color: ACCENT,
     elevated: false,
     chart: "lollipop" as const,
     metrics: [
@@ -275,9 +296,9 @@ function GroupPanel({ group, index }: { group: (typeof GROUPS)[0]; index: number
         marginBottom: group.elevated ? 24 : 0,
       }}
       onMouseEnter={(e) => {
-        e.currentTarget.style.background = `rgba(${group.color === "#C9974A" ? "201,151,74" : group.color === "#E8956D" ? "232,149,109" : "194,85,58"},0.08)`;
-        e.currentTarget.style.borderColor = `${group.color}55`;
-        e.currentTarget.style.boxShadow = `0 0 40px ${group.color}18`;
+        e.currentTarget.style.background = "rgba(194,85,58,0.08)";
+        e.currentTarget.style.borderColor = `${ACCENT}55`;
+        e.currentTarget.style.boxShadow = `0 0 40px ${ACCENT}18`;
       }}
       onMouseLeave={(e) => {
         e.currentTarget.style.background = "rgba(255,255,255,0.04)";
@@ -325,8 +346,8 @@ function GroupPanel({ group, index }: { group: (typeof GROUPS)[0]; index: number
             />
           </div>
         )}
-        {group.chart === "bubbles" && (
-          <BubbleChart metrics={group.metrics} color={group.color} active={active} />
+        {group.chart === "tubes" && (
+          <TestTubeChart metrics={group.metrics} color={group.color} active={active} />
         )}
         {group.chart === "lollipop" && (
           <LollipopChart metrics={group.metrics} color={group.color} active={active} />
